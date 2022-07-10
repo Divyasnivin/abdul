@@ -16,7 +16,7 @@ print(
 cmdhr = Config.COMMAND_HAND_LER
 try:
     LOGS.info(
-"بدء تنزيل تليثون العرب"
+"بدء تنزيل سورس جاك"
 )
     iqthon.loop.run_until_complete(
 setup_bot())
@@ -35,7 +35,7 @@ async def startup_process():
     await load_plugins("assistant")
     await load_plugins("MusicTelethon")
     print(
-f"<b> ⌔︙ اهلا بك لقد نصبت تليثون العرب بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/iqthon "
+f"<b> ⌔︙ اهلا بك لقد نصبت بسورس جاك  بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/kbbbd2 "
 )
     await verifyLoggerGroup()
     await add_bot_to_logger_group(BOTLOG_CHATID)
