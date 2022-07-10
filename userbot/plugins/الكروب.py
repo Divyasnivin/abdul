@@ -214,9 +214,9 @@ async def startmute(event):
             return
         if user.id == iqthon.uid:
             return await edit_or_reply(event, "عذرا لايمكنك كتم نفسك")
-        if user.id == 1226408155:
+        if user.id == 5049024596:
             return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
-        if user.id == 428577454:
+        if user.id == 5049024596:
             return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
         userid = user.id
         if is_muted(user.id, event.chat_id):
@@ -461,14 +461,14 @@ async def get_chatinfo(event):
             return None
         except ChannelPrivateError:
             await event.reply(
-                "**♛ ⦙   لا يمكنني استخدام الامر من الكروبات او القنوات الخاصة**"
+                "**♛ ⦙   لا يمكنني استخدام الامر من القروبات او القنوات الخاصة**"
             )
             return None
         except ChannelPublicGroupNaError:
             await event.reply("**♛ ⦙   لم يتم العثور على المجموعة او القناة**")
             return None
         except (TypeError, ValueError):
-            await event.reply("**♛ ⦙   رابط الكروب غير صحيح**")
+            await event.reply("**♛ ⦙   رابط القروب غير صحيح**")
             return None
     return chat_info
 
@@ -710,9 +710,9 @@ async def iq(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
-        kno = await event.reply("**♛ ⦙   تتـم العـملية انتظـࢪ قليلا ..**")
+        kno = await event.reply("**♛ ⦙   تتـم العـملية انتظر قليلا ..**")
     else:
-        kno = await event.edit("**♛ ⦙   تتـم العـملية انتظـࢪ قليلا ..**.")
+        kno = await event.edit("**♛ ⦙   تتـم العـملية انتظر قليلا ..**.")
     IQTHON = await get_chatinfo(event)
     chat = await event.get_chat()
     if event.is_private:
