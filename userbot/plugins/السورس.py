@@ -89,7 +89,7 @@ async def iq(iqthonevent):
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "♛︙"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𝗐𝖾𝗅𝖼𝗈𝗆𝖾 𝗍𝖾𝗅𝖾𝗍𝗁𝗈𝗇 𝖺𝗅 𝖺𝗋𝖺𝖻 𓃠"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "Welcome Source Jack 𓃠"
     IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/e7b3ea8dc56ac781d756c.mp4"
     tg_bot = Config.TG_BOT_USERNAME
     me = await iqthonevent.client.get_me()
@@ -129,7 +129,7 @@ fahs = """♛ : me  {my_mention}  𓇡.
 @iqthon.on(admin_cmd(pattern="رابط التنصيب(?: |$)(.*)"))    
 async def source(e):
     await edit_or_reply(e, "https://github.com/TelethonArab/TelethonAr",)
-@iqthon.on(admin_cmd(pattern="حساب كيثاب( -l(\d+))? ([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="حساب ققيثاب( -l(\d+))? ([\s\S]*)"))    
 async def _(event):
     reply_to = await reply_id(event)
     username = event.pattern_match.group(3)
@@ -188,7 +188,7 @@ async def amireallyalive(event):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " ٍَ 🖤"
-    IQTHON_ALIVE_TEXT = "❬ تـليثون العـرب - Telethon-Arabe ، 🕸  ❭ :"
+    IQTHON_ALIVE_TEXT = "❬ سورس جاك  -  source-Jack ، 🕸  ❭ :"
     IQTHON_IMG = gvarstatus("ALIVE_PIC")
     if IQTHON_IMG:
         CAT = [x for x in IQTHON_IMG.split()]
@@ -206,7 +206,7 @@ async def amireallyalive(event):
 async def _(event):
     cmd = "env"
     o = (await _catutils.runcmd(cmd))[0]
-    OUTPUT = (f"♛︙  وحـدة المعلومات الخاصه بتنصيبك مع جميع الفارات  لتنصيب سورس تليثون @iqthon :**\n\n{o}")
+    OUTPUT = (f"♛︙  وحـدة المعلومات الخاصه بتنصيبك مع جميع الفارات  لتنصيب سورس جاك @kbbbd2 :**\n\n{o}")
     await edit_or_reply(event, OUTPUT)
 
 if Config.PLUGIN_CHANNEL:
