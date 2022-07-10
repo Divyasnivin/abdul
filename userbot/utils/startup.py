@@ -99,7 +99,7 @@ async def verifyLoggerGroup():
             LOGS.error(                "♛ ︙حدث استثناء عند محاولة التحقق من PRIVATE_GROUP_BOT_API_ID.\n"                + str(e)            )
     else:
         descript = "♛ ︙ لا تحذف هذه المجموعة أو تغير إلى مجموعة (إذا قمت بتغيير المجموعة ، فسيتم فقد كل شيئ .)"
-        _, groupid = await create_supergroup(            "تخزين تليثون العرب العام", iqthon, Config.TG_BOT_USERNAME, descript        )
+        _, groupid = await create_supergroup(            "تخزين سورس جاك العام", iqthon, Config.TG_BOT_USERNAME, descript        )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print("♛ ︙ تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات.")
         flag = True
@@ -118,7 +118,7 @@ async def verifyLoggerGroup():
         except Exception as e:
             LOGS.error(                "♛ ︙ حدث استثناء عند محاولة التحقق من PM_LOGGER_GROUP_ID.\n" + str(e)            )
     else:
-        descript = "♛ ︙ وظيفه هذا المجموعة لحفض رسائل التي تكون موجة اليك ان لم تعجبك هذا المجموعة قم بحذفها نهائيأ 👍 \n  الـسورس : - @kbbbd"
+        descript = "♛ ︙ وظيفه هذا المجموعة لحفض رسائل التي تكون موجة اليك ان لم تعجبك هذا المجموعة قم بحذفها نهائيأ 👍 \n  الـسورس : - @kbbbd2"
         _, groupid = await create_supergroup(            "تخزين سورس جاك الخاص", iqthon, Config.TG_BOT_USERNAME, descript        )
         addgvar("PM_LOGGER_GROUP_ID", groupid)
         print("♛ ︙ تم إنشاء مجموعة خاصة لـ PRIVATE_GROUP_BOT_API_ID بنجاح وإضافتها إلى المتغيرات.")
