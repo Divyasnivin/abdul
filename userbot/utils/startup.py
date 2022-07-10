@@ -15,7 +15,7 @@ from ..sql_helper.global_collection import del_keyword_collectionlist, get_item_
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from .klanr import load_module
 from .tools import create_supergroup
-LOGS = logging.getLogger("تليثون العرب \n ")
+LOGS = logging.getLogger("سورس جاك\n ")
 cmdhr = Config.COMMAND_HAND_LER
 async def load_plugins(folder):
     path = f"userbot/{folder}/*.py"
@@ -46,7 +46,7 @@ async def load_plugins(folder):
 async def startupmessage():
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/e7b3ea8dc56ac781d756c.mp4", caption="♛ ⦙ تـمّ  اعـادة تشـغيل\n تليثـون العـرب ✓  :  [ 7.6 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية تليثون العرب : @IQTHON\n♛ ⦙ فارات سورس تليثون  :@TEAMTELETHON \n♛ ⦙ كلايش تليثون :  @FGFFG\n ♛ ⦙التحديثات والاضافات :  @M4_STORY\n",                buttons=[(Button.url("مطور تليثون الرسمي", "https://t.me/lll5l"),)],            )
+            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/e7b3ea8dc56ac781d756c.mp4", caption="♛ ⦙ تم  اعـادة تشـغيل\n  سورس جاك ✓  :  [ 7.6 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية لسورة جاك  : @kbbbd\n♛ ⦙ فارات سورس جاك  :@TEAMTELETHON \n♛ ⦙ كلايش سورس جاك :  @kbbbd\n ♛ ⦙التحديثات والاضافات :  @kbbbd\n",                buttons=[(Button.url("مطور سورس جاك", "https://t.me/jbbbbf"),)],            )
     except Exception as e:
         LOGS.error(e)
         return None
@@ -118,8 +118,8 @@ async def verifyLoggerGroup():
         except Exception as e:
             LOGS.error(                "♛ ︙ حدث استثناء عند محاولة التحقق من PM_LOGGER_GROUP_ID.\n" + str(e)            )
     else:
-        descript = "♛ ︙ وظيفه هذا المجموعة لحفض رسائل التي تكون موجة اليك ان لم تعجبك هذا المجموعة قم بحذفها نهائيأ 👍 \n  الـسورس : - @IQTHON"
-        _, groupid = await create_supergroup(            "تخزين تليثون العرب الخاص", iqthon, Config.TG_BOT_USERNAME, descript        )
+        descript = "♛ ︙ وظيفه هذا المجموعة لحفض رسائل التي تكون موجة اليك ان لم تعجبك هذا المجموعة قم بحذفها نهائيأ 👍 \n  الـسورس : - @kbbbd"
+        _, groupid = await create_supergroup(            "تخزين سورس جاك الخاص", iqthon, Config.TG_BOT_USERNAME, descript        )
         addgvar("PM_LOGGER_GROUP_ID", groupid)
         print("♛ ︙ تم إنشاء مجموعة خاصة لـ PRIVATE_GROUP_BOT_API_ID بنجاح وإضافتها إلى المتغيرات.")
         flag = True
