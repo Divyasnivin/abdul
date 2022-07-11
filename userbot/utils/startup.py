@@ -42,11 +42,11 @@ async def load_plugins(folder):
                     os.remove(Path(f"userbot/{folder}/{shortname}.py"))
             except Exception as e:
                 os.remove(Path(f"userbot/{folder}/{shortname}.py"))
-                LOGS.info(f"♛ ︙غير قادر على التحميل {shortname} يوجد هناك خطا بسبب : {e}"                )
+                LOGS.info(f"• ︙غير قادر على التحميل {shortname} يوجد هناك خطا بسبب : {e}"                )
 async def startupmessage():
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/e7b3ea8dc56ac781d756c.mp4", caption="♛ ⦙ تم  اعـادة تشـغيل\n  سورس جاك ✓  :  [ 7.6 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية لسورة جاك  : @kbbbd\n♛ ⦙ فارات سورس جاك  :@TEAMTELETHON \n♛ ⦙ كلايش سورس جاك :  @kbbbd\n ♛ ⦙التحديثات والاضافات :  @kbbbd\n",                buttons=[(Button.url("مطور سورس جاك", "https://t.me/jbbbbf"),)],            )
+            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/e7b3ea8dc56ac781d756c.mp4", caption="• ⦙ تم  اعـادة تشـغيل\n  سورس جاك ✓  :  [ 7.6 ] .\n\n♛ ⦙ للحصول على اوامر السورس\n أرسـل : (  `.اوامري`  ) \n\n♛ ⦙ لمـعرفة كيفية تغير بعض كلايش\n او صور السـورس  أرسـل  :\n (  `.مساعده`  )\n\n♛ ⦙ القناة الرسمية لسورس جاك  : @kbbbd2\n♛ ⦙ فارات سورس جاك  :@kbbbd2 \n♛ ⦙ كلايش سورس جاك :  @kbbbd2\n ♛ ⦙التحديثات والاضافات :  @kbbbd2\n",                buttons=[(Button.url("مطور سورس جاك", "https://t.me/jbbbbf"),)],            )
     except Exception as e:
         LOGS.error(e)
         return None
