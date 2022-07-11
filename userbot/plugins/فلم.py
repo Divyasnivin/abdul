@@ -4,12 +4,12 @@ from imdb import Cinemagoer
 import requests
 from html_telegraph_poster.upload_images import upload_image
 from random import randint
-from jepthon import jepiq
+from userbot import iqthon
 import asyncio
 from ..core.managers import edit_delete, edit_or_reply
 ia = Cinemagoer()
 
-@jepiq.ar_cmd(pattern="فلم")
+@iqthon.iq_cmd(pattern="فلم")
 async def rfilm(event):
     await event.edit("يرجى الانتضار جاري البحث على فلم...")
     for _ in range(100):
@@ -29,7 +29,7 @@ async def rfilm(event):
             moviep = f"https://telegra.ph/file/15480332b663adae49205.jpg"
         moviet = f"الاسم: {movien}\nالسنة: {year}\nالتقييم: {rating}"
         await event.delete()
-        await jepiq.send_file(
+        await catevent.send_file(
                 event.chat_id,
                 moviep,
                 caption=moviet,
