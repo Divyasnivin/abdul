@@ -3,7 +3,6 @@
 from imdb import Cinemagoer
 import requests
 from html_telegraph_poster.upload_images import upload_image
-from random import randint
 from userbot import iqthon
 import asyncio
 from ..core.managers import edit_delete, edit_or_reply
