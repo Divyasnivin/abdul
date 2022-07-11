@@ -192,7 +192,7 @@ async def startmute(event):
     if event.is_private:
         replied_user = await event.client.get_entity(event.chat_id)
         if is_muted(event.chat_id, event.chat_id):
-            return await event.edit(                "هذاالشخص بلفعل مكتوم "            )
+            return await event.edit(                "هذا الشخص بالفعل مكتوم "            )
         if event.chat_id == iqthon.uid:
             return await edit_delete(event, "لايمكنك كتم نفسك")
         try:
@@ -208,23 +208,23 @@ async def startmute(event):
         admin = chat.admin_rights
         creator = chat.creator
         if not admin and not creator:
-            return await edit_or_reply(                event, "عذراليس لديك صلاحيه ادمن"            )
+            return await edit_or_reply(                event, "عذرا ليس لديك صلاحيه ادمن"            )
         user, reason = await get_user_from_event(event)
         if not user:
             return
         if user.id == iqthon.uid:
             return await edit_or_reply(event, "عذرا لايمكنك كتم نفسك")
         if user.id == 5049024596:
-            return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
+            return await edit_or_reply(event, "**- لا يمڪنني كتـم مبرمج السـورس **")
         if user.id == 5049024596:
-            return await edit_or_reply(event, "**- دي لا يمڪنني كتـم مبرمج السـورس **")
+            return await edit_or_reply(event, "**- لا يمڪنني كتـم مبرمج السـورس **")
         userid = user.id
         if is_muted(user.id, event.chat_id):
-            return await edit_or_reply(                event, "هذاالشخص بلفعل مكتوم"            )
+            return await edit_or_reply(                event, "هذاالشخص بالفعل مكتوم"            )
         result = await event.client.get_permissions(event.chat_id, user.id)
         try:
             if result.participant.banned_rights.send_messages:
-                return await edit_or_reply(                    event,                    "هذا الشخص بلفعل مكتوم",                )
+                return await edit_or_reply(                    event,                    "هذا الشخص بالفعل مكتوم",                )
         except AttributeError:
             pass
         except Exception as e:
@@ -274,7 +274,7 @@ async def endmute(event):
                 if result.participant.banned_rights.send_messages:
                     await event.client(                        EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS)                    )
         except AttributeError:
-            return await edit_or_reply(                event,                "هذا الشخص بلفعل تم فتح كتمه",            )
+            return await edit_or_reply(                event,                "هذا الشخص بالفعل تم فتح كتمه",            )
         except Exception as e:
             return await edit_or_reply(event, f"**خطأ : **`{e}`")
         await edit_or_reply(            event,            f"{_format.mentionuser(user.first_name ,user.id)} هذا الشخص تم فتح كتمه {get_display_name(await event.get_chat())}",
@@ -332,12 +332,12 @@ async def _(event):
 
 @iqthon.on(admin_cmd(pattern=r"البوتات?(.*)"))
 async def _(event):
-    mentions = "**♛ ⦙  البـوتات في هذه الـمجموعة 🝰 : ** \n"
+    mentions = "**• ⦙  البـوتات في هذه الـمجموعة  : ** \n"
     input_str = event.pattern_match.group(1)
     if not input_str:
         chat = await event.get_input_chat()
     else:
-        mentions = "**♛ ⦙  البوتـات في {} من المجموعات 🝰 : ** \n".format(input_str)
+        mentions = "**• ⦙  البوتـات في {} من المجموعات  : ** \n".format(input_str)
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
@@ -357,32 +357,32 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@iqthon.on(admin_cmd(pattern=r"الأعضاء(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"الاعضاء(?: |$)(.*)"))
 async def get_users(show):
     mentions = "**مستخدمين هذه المجموعة**: \n"
     await reply_id(show)
     input_str = show.pattern_match.group(1)
     if input_str:
-        mentions = "**♛ ⦙  الأعضاء في {} من المجموعات 𖤍  :** \n".format(input_str)
+        mentions = "**• ⦙  الأعضاء في {} من المجموعات   :** \n".format(input_str)
         try:
             chat = await show.client.get_entity(input_str)
         except Exception as e:
             return await edit_delete(show, f"`{str(e)}`", 10)
     else:
         if not show.is_group:
-            return await edit_or_reply(show, "**♛ ⦙  هـذه ليسـت مجموعـة ✕**")
-    catevent = await edit_or_reply(show, "**♛ ⦙  جـاري سحـب قائمـة معرّفـات الأعضـاء 🝛**")
+            return await edit_or_reply(show, "**• ⦙  هـذه ليسـت مجموعـة **")
+    catevent = await edit_or_reply(show, "**• ⦙  جـاري سحـب قائمـة معرّفـات الأعضـاء **")
     try:
         if show.pattern_match.group(1):
             async for user in show.client.iter_participants(chat.id):
                 if user.deleted:
-                    mentions += f"\n**♛ ⦙  الحسـابات المحذوفـة ⌦** `{user.id}`"
+                    mentions += f"\n**• ⦙  الحسـابات المحذوفـة ** `{user.id}`"
                 else:
                     mentions += (f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`")
         else:
             async for user in show.client.iter_participants(show.chat_id):
                 if user.deleted:
-                    mentions += f"\n**♛ ⦙  الحسـابات المحذوفـة ⌦** `{user.id}`"
+                    mentions += f"\n**• ⦙  الحسـابات المحذوفـة ** `{user.id}`"
                 else:
                     mentions += (f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`")
     except Exception as e:
@@ -391,15 +391,15 @@ async def get_users(show):
 
 @iqthon.on(admin_cmd(pattern=r"معلومات(?: |$)(.*)"))
 async def info(event):
-    catevent = await edit_or_reply(event, "**♛ ⦙  يتـمّ جلـب معلومـات الدردشـة، إنتظـر ⅏**")
+    catevent = await edit_or_reply(event, "**• ⦙  يتم جلـب معلومـات الدردشـة، إنتظـر **")
     chat = await get_chatinfo(event, catevent)
     caption = await fetch_info(chat, event)
     try:
         await catevent.edit(caption, parse_mode="html")
     except Exception as e:
         if BOTLOG:
-            await event.client.send_message(BOTLOG_CHATID, f"**♛ ⦙  هنـاك خطـأ في معلومـات الدردشـة ✕ : **\n`{str(e)}`")
-        await catevent.edit("**♛ ⦙   حـدث خـطأ مـا، يرجـى التحقق من الأمـر ⎌**")
+            await event.client.send_message(BOTLOG_CHATID, f"**• ⦙  هنـاك خطـأ في معلومـات الدردشـة  : **\n`{str(e)}`")
+        await catevent.edit("**• ⦙   حـدث خـطأ مـا، يرجـى التحقق من الأمـر **")
 async def get_chatinfo(event, catevent):
     chat = event.pattern_match.group(1)
     chat_info = None
@@ -421,15 +421,15 @@ async def get_chatinfo(event, catevent):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await catevent.edit("**♛ ⦙  لـم يتـمّ العثـور على القنـاة/المجموعـة ✕**")
+            await catevent.edit("**• ⦙  لـم يتـمّ العثـور على القنـاة/المجموعـة **")
             return None
         except ChannelPrivateError:
             await catevent.edit(
-                '**♛ ⦙   هـذه مجموعـة أو قنـاة خاصـة أو لقد تمّ حظـري منه ⛞**'
+                '**• ⦙   هـذه مجموعـة أو قنـاة خاصـة أو لقد تمّ حظـري منه **'
             )
             return None
         except ChannelPublicGroupNaError:
-            await catevent.edit("**♛ ⦙  القنـاة أو المجموعـة الخارقـة غيـر موجـودة ✕**")
+            await catevent.edit("**• ⦙  القنـاة أو المجموعـة الخارقـة غيـر موجـودة ✕**")
             return None
         except (TypeError, ValueError) as err:
             await catevent.edit(str(err))
@@ -457,18 +457,18 @@ async def get_chatinfo(event):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await event.reply("**♛ ⦙   لم يتم العثور على المجموعة او القناة**")
+            await event.reply("**• ⦙   لم يتم العثور على المجموعة او القناة**")
             return None
         except ChannelPrivateError:
             await event.reply(
-                "**♛ ⦙   لا يمكنني استخدام الامر من القروبات او القنوات الخاصة**"
+                "**• ⦙   لا يمكنني استخدام الامر من القروبات او القنوات الخاصة**"
             )
             return None
         except ChannelPublicGroupNaError:
-            await event.reply("**♛ ⦙   لم يتم العثور على المجموعة او القناة**")
+            await event.reply("**• ⦙   لم يتم العثور على المجموعة او القناة**")
             return None
         except (TypeError, ValueError):
-            await event.reply("**♛ ⦙   رابط القروب غير صحيح**")
+            await event.reply("**• ⦙   رابط القروب غير صحيح**")
             return None
     return chat_info
 
@@ -636,73 +636,73 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         for _ in bots_list:
             bots += 1  
 
-    caption = "<b>♛ ⦙  معلومـات الدردشـة  🝢 :</b>\n"
-    caption += f"♛ ⦙  الآيـدي  : <code>{chat_obj_info.id}</code>\n"
+    caption = "<b>• ⦙  معلومـات الدردشـة   :</b>\n"
+    caption += f"• ⦙  الآيـدي  : <code>{chat_obj_info.id}</code>\n"
     if chat_title is not None:
-        caption += f"♛ ⦙  إسـم المجموعـة  :{chat_title}\n"
+        caption += f"• ⦙  إسـم المجموعـة  :{chat_title}\n"
     if former_title is not None:  # Meant is the very first title
-        caption += f"♛ ⦙  الإسم السابـق  : {former_title}\n"
+        caption += f"• ⦙  الإسم السابـق  : {former_title}\n"
     if username is not None:
-        caption += f"♛ ⦙  نـوع المجموعـة ⌂ : مجموعـة عامّـة  \n"
-        caption += f"♛ ⦙  الرابـط  : \n {username}\n"
+        caption += f"• ⦙  نـوع المجموعـة ⌂ : مجموعـة عامّـة  \n"
+        caption += f"• ⦙  الرابـط  : \n {username}\n"
     else:
-        caption += f"♛ ⦙   نـوع المجموعـة ⌂ : مجموعـة عامّـة  \n"
+        caption += f"• ⦙   نـوع المجموعـة ⌂ : مجموعـة عامّـة  \n"
     if creator_username is not None:
-        caption += f"♛ ⦙   المالـك  :  {creator_username}\n"
+        caption += f"• ⦙   المالـك  :  {creator_username}\n"
     elif creator_valid:
-        caption += ('♛ ⦙   المالـك  : <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n')
+        caption += ('• ⦙   المالـك  : <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n')
     if created is not None:
-        caption += f"♛ ⦙  تاريـخ الإنشـاء  : \n <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
+        caption += f"• ⦙  تاريـخ الإنشـاء  : \n <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
     else:
-        caption += f"♛ ⦙  الإنتـاج  :   <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
-    caption += f"♛ ⦙  آيـدي قاعـدة البيانـات : {dc_id}\n"
+        caption += f"• ⦙  الإنتـاج  :   <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
+    caption += f"• ⦙  آيـدي قاعـدة البيانـات : {dc_id}\n"
     if exp_count is not None:
         chat_level = int((1 + sqrt(1 + 7 * exp_count / 14)) / 2)
-        caption += f"♛ ⦙  الأعضـاء : <code>{chat_level}</code>\n"
+        caption += f"• ⦙  الأعضـاء : <code>{chat_level}</code>\n"
     if messages_viewable is not None:
-        caption += f"♛ ⦙  الرسائـل التي يمڪن مشاهدتها : <code>{messages_viewable}</code>\n"
+        caption += f"• ⦙  الرسائـل التي يمڪن مشاهدتها : <code>{messages_viewable}</code>\n"
     if messages_sent:
-        caption += f"♛ ⦙  الرسائـل المرسلـة  :<code>{messages_sent}</code>\n"
+        caption += f"• ⦙  الرسائـل المرسلـة  :<code>{messages_sent}</code>\n"
     elif messages_sent_alt:
-        caption += f"♛ ⦙  الرسـائل المرسلة: <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        caption += f"• ⦙  الرسـائل المرسلة: <code>{messages_sent_alt}</code> {warn_emoji}\n"
     if members is not None:
-        caption += f"♛ ⦙  الأعضـاء : <code>{members}</code>\n"
+        caption += f"• ⦙  الأعضـاء : <code>{members}</code>\n"
     if admins is not None:
-        caption += f"♛ ⦙  المشرفيـن : <code>{admins}</code>\n"
+        caption += f"• ⦙  المشرفيـن : <code>{admins}</code>\n"
     if bots_list:
-        caption += f"♛ ⦙  البـوتات : <code>{bots}</code>\n"
+        caption += f"• ⦙  البـوتات : <code>{bots}</code>\n"
     if members_online:
-        caption += f"♛ ⦙  المتصليـن حـالياً : <code>{members_online}</code>\n"
+        caption += f"• ⦙  المتصليـن حـالياً : <code>{members_online}</code>\n"
     if restrcited_users is not None:
-        caption += f"♛ ⦙  الأعضـاء المقيّديـن : <code>{restrcited_users}</code>\n"
+        caption += f"• ⦙  الأعضـاء المقيّديـن : <code>{restrcited_users}</code>\n"
     if banned_users is not None:
-        caption += f"♛ ⦙  الأعضـاء المحظوريـن : <code>{banned_users}</code>"
+        caption += f"• ⦙  الأعضـاء المحظوريـن : <code>{banned_users}</code>"
     if group_stickers is not None:
-        caption += f'{chat_type} ♛ ⦙  الملصقـات : <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>'
+        caption += f'{chat_type} • ⦙  الملصقـات : <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>'
     caption += "\n"
     if not broadcast:
-        caption += f"♛ ⦙  الوضـع البطيئ : {slowmode}"
+        caption += f"• ⦙  الوضـع البطيئ : {slowmode}"
         if (
             hasattr(chat_obj_info, "slowmode_enabled")
             and chat_obj_info.slowmode_enabled):
             caption += f", <code>{slowmode_time}s</code>\n"
         else:
             caption += "\n"
-        caption += f"♛ ⦙  الـمجموعـة الخارقـة  : {supergroup}\n"
+        caption += f"• ⦙  الـمجموعـة الخارقـة  : {supergroup}\n"
     if hasattr(chat_obj_info, "restricted"):
-        caption += f"♛ ⦙  المقيّـد : {restricted}"
+        caption += f"• ⦙  المقيّـد : {restricted}"
         if chat_obj_info.restricted:
             caption += f"> : {chat_obj_info.restriction_reason[0].platform}\n"
-            caption += f"> ♛ ⦙  السـبب  : {chat_obj_info.restriction_reason[0].reason}\n"
-            caption += f"> ♛ ⦙  النّـص  : {chat_obj_info.restriction_reason[0].text}\n\n"
+            caption += f"> • ⦙  السـبب  : {chat_obj_info.restriction_reason[0].reason}\n"
+            caption += f"> • ⦙  النّـص  : {chat_obj_info.restriction_reason[0].text}\n\n"
         else:
             caption += "\n"
     if hasattr(chat_obj_info, "scam") and chat_obj_info.scam:
-        caption += "♛ ⦙  السارقيـن : <b>Yes</b>\n"
+        caption += "• ⦙  السارقيـن : <b>Yes</b>\n"
     if hasattr(chat_obj_info, "verified"):
-        caption += f"♛ ⦙  الحسابـات الموثقـة   : {verified}\n"
+        caption += f"• ⦙  الحسابـات الموثقـة   : {verified}\n"
     if description:
-        caption += f"♛ ⦙  الوصـف  : \n<code>{description}</code>\n"
+        caption += f"• ⦙  الوصـف  : \n<code>{description}</code>\n"
     return caption
 
 @iqthon.on(admin_cmd(pattern=f"{addition} ?(.*)"))
@@ -710,42 +710,42 @@ async def iq(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
-        kno = await event.reply("**♛ ⦙   تتـم العـملية انتظر قليلا ..**")
+        kno = await event.reply("**• ⦙   تتـم العـملية انتظر قليلا ..**")
     else:
-        kno = await event.edit("**♛ ⦙   تتـم العـملية انتظر قليلا ..**.")
+        kno = await event.edit("**• ⦙   تتـم العـملية انتظر قليلا ..**.")
     IQTHON = await get_chatinfo(event)
     chat = await event.get_chat()
     if event.is_private:
-        return await kno.edit("**♛ ⦙   لا يمكننـي اضافـة المـستخدمين هـنا**")
+        return await kno.edit("**• ⦙   لا يمكننـي اضافـة المـستخدمين هـنا**")
     s = 0
     f = 0
     error = "None"
 
-    await kno.edit("**♛ ⦙   حـالة الأضافة:**\n\n**♛ ⦙   تتـم جـمع معـلومات الـمستخدمين 🔄 ...⏣**")
+    await kno.edit("**• ⦙   حـالة الأضافة:**\n\n**• ⦙   تتـم جـمع معـلومات الـمستخدمين  ...**")
     async for user in event.client.iter_participants(IQTHON.full_chat.id):
         try:
             if error.startswith("Too"):
                 return (
                     await kno.edit(
-                        f"**♛ ⦙   حـالة الأضـافة انتـهت مـع الأخـطاء**\n- (**ربـما هـنالك ضغـط عـلى الأمر حاول مجـدا لاحقـا **) \n**♛ ⦙   الـخطأ ** : \n`{error}`\n\n♛ ⦙   اضالـة `{s}` \n♛ ⦙   خـطأ بأضافـة `{f}`"
+                        f"**• ⦙   حـالة الأضـافة انتـهت مـع الأخـطاء**\n- (**ربـما هـنالك ضغـط عـلى الأمر حاول مجـدا لاحقـا **) \n** ⦙   الـخطأ ** : \n`{error}`\n\n• ⦙   اضالـة `{s}` \n• ⦙   خـطأ بأضافـة `{f}`"
                     ),
                 )
             await event.client(
                 functions.channels.InviteToChannelRequest(channel=chat, users=[user.id])
             )
             s = s + 1
-            await kno.edit(f"**♛ ⦙   تتـم الأضـافة :**\n\n♛ ⦙   اضـيف `{s}` \n♛ ⦙    خـطأ بأضافـة `{f}` \n\n**♛ ⦙   × اخـر خـطأ:** `{error}`")
+            await kno.edit(f"**• ⦙   تتـم الأضـافة :**\n\n• ⦙   اضـيف `{s}` \n• ⦙    خـطأ بأضافـة `{f}` \n\n**• ⦙   × اخـر خـطأ:** `{error}`")
         except Exception as e:
             error = str(e)
             f = f + 1
-    return await kno.edit(f"**♛ ⦙   اڪتـملت الأضافـة ✅** : \n\n♛ ⦙   تـم بنجـاح اضافـة `{s}` \n♛ ⦙   خـطأ بأضافـة `{f}`")
+    return await kno.edit(f"**• ⦙   اڪتـملت الأضافـة ** : \n\n• ⦙   تـم بنجـاح اضافـة `{s}` \n• ⦙   خـطأ بأضافـة `{f}`")
     
 @iqthon.on(admin_cmd(pattern=f"{TFLASH}(.*)"))
 async def _(event):
     result = await event.client(functions.channels.GetParticipantRequest(event.chat_id, event.client.uid))
     if not result:
-        return await edit_or_reply(event, "**♛ ⦙   ليس لديك صلاحيه حظر في هذا الدردشة**")
-    iqthonevent = await edit_or_reply(event, "**♛ ⦙  جاري تفليش مجموعتك أنتظر قليلآ 🚮**")
+        return await edit_or_reply(event, "**• ⦙   ليس لديك صلاحيه حظر في هذا الدردشة**")
+    iqthonevent = await edit_or_reply(event, "**• ⦙  جاري تفليش مجموعتك أنتظر قليلآ **")
     admins = await event.client.get_participants(event.chat_id, filter=ChannelParticipantsAdmins)
     admins_id = [i.id for i in admins]
     total = 0
@@ -759,7 +759,7 @@ async def _(event):
                 await sleep(0.2)  
         except Exception as e:
             LOGS.info(str(e))
-    await iqthonevent.edit(f"**♛ ⦙   تم بنجاح تفليش مجموعتك من {total} الاعضاء 🚮**")
+    await iqthonevent.edit(f"**• ⦙   تم بنجاح تفليش مجموعتك من {total} الاعضاء **")
     
 async def ban_user(chat_id, i, rights):
     try:
@@ -771,12 +771,12 @@ async def ban_user(chat_id, i, rights):
 
 @iqthon.on(admin_cmd(pattern=f"{LEFT}(.*)"))
 async def kickme(leave):
-    await leave.edit("**♛ ⦙   جـاري مـغادرة المجـموعة مـع السـلامة  🚶‍♂️  ..**")
+    await leave.edit("**• ⦙   جـاري مـغادرة المجـموعة مـع السـلامة    ..**")
     await leave.client.kick_participant(leave.chat_id, "me")
 
 @iqthon.on(admin_cmd(pattern=f"{REMOVEBAN}(.*)"))
 async def _(event):
-    catevent = await edit_or_reply(event, "**♛ ⦙    إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة 🆘**")
+    catevent = await edit_or_reply(event, "**• ⦙    إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة **")
     succ = 0
     total = 0
     flag = False
@@ -787,8 +787,8 @@ async def _(event):
         try:
             await event.client(functions.channels.EditBannedRequest(event.chat_id, i, rights))
         except FloodWaitError as e:
-            LOGS.warn(f"**♛ ⦙   هناك ضغط كبير بالاستخدام يرجى الانتضار .. ‼️ بسبب  : {e.seconds} **")
-            await catevent.edit(f"**♛ ⦙   {readable_time(e.seconds)} مطلـوب المـعاودة مـرة اخـرى للـمسح 🔁 **")
+            LOGS.warn(f"**• ⦙   هناك ضغط كبير بالاستخدام يرجى الانتضار .. ‼️ بسبب  : {e.seconds} **")
+            await catevent.edit(f"**• ⦙   {readable_time(e.seconds)} مطلـوب المـعاودة مـرة اخـرى للـمسح  **")
             await sleep(e.seconds + 5)
         except Exception as ex:
             await catevent.edit(str(ex))
@@ -800,33 +800,33 @@ async def _(event):
                 await sleep(1)
             try:
                 if succ % 10 == 0:
-                    await catevent.edit(f"**♛ ⦙   جـاري مسـح المحـظورين ⭕️  : \n {succ} الحسـابات الـتي غيـر محظـورة لحـد الان.**")
+                    await catevent.edit(f"**• ⦙   جـاري مسـح المحـظورين   : \n {succ} الحسـابات الـتي غيـر محظـورة لحـد الان.**")
             except MessageNotModifiedError:
                 pass
-    await catevent.edit(f"**♛ ⦙   تـم مسـح المحـظورين مـن أصـل 🆘 :**{succ}/{total} \n اسـم المجـموعـة 📄 : {chat.title}")
+    await catevent.edit(f"**• ⦙   تـم مسـح المحـظورين مـن أصـل  :**{succ}/{total} \n اسـم المجـموعـة  : {chat.title}")
 
 @iqthon.on(admin_cmd(pattern=f"المحذوفين ?([\s\S]*)"))
 async def rm_deletedacc(show):
     con = show.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "**♛ ⦙  لا توجـد حـسابات محذوفـة في هـذه المجموعـة !**"
+    del_status = "**• ⦙  لا توجـد حـسابات محذوفـة في هـذه المجموعـة !**"
     if con != "تنظيف":
-        event = await edit_or_reply(show, "**♛ ⦙  جـاري البحـث عـن الحسابـات المحذوفـة ⌯**")
+        event = await edit_or_reply(show, "**• ⦙  جـاري البحـث عـن الحسابـات المحذوفـة ⌯**")
         async for user in show.client.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
                 await sleep(0.5)
         if del_u > 0:
-            del_status = f"**♛ ⦙  لقد وجـدت  {del_u}  من  حسابـات محذوفـة في هـذه المجموعـة لحذفهـم إستخـدم الأمـر  ⩥ :  `.المحذوفين تنظيف`"
+            del_status = f"**• ⦙  لقد وجـدت  {del_u}  من  حسابـات محذوفـة في هـذه المجموعـة لحذفهـم إستخـدم الأمـر  :  `.المحذوفين تنظيف`"
         await event.edit(del_status)
         return
     chat = await show.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_delete(show, "♛ ⦙  أنـا لسـت مشـرفـاً هنـا !", 5)
+        await edit_delete(show, " ⦙  أنـا لسـت مشـرفـاً هنـا !", 5)
         return
-    event = await edit_or_reply(show, "**♛ ⦙  جـاري حـذف الحسـابات المحذوفـة ⌯**")
+    event = await edit_or_reply(show, "** ⦙  جـاري حـذف الحسـابات المحذوفـة ⌯**")
     del_u = 0
     del_a = 0
     async for user in show.client.iter_participants(show.chat_id):
@@ -836,21 +836,21 @@ async def rm_deletedacc(show):
                 await sleep(0.5)
                 del_u += 1
             except ChatAdminRequiredError:
-                await edit_delete(event, "**♛ ⦙    ليس لدي صلاحيات الحظر هنا**", 5)
+                await edit_delete(event, "**• ⦙    ليس لدي صلاحيات الحظر هنا**", 5)
                 return
             except UserAdminInvalidError:
                 del_a += 1
     if del_u > 0:
-        del_status = f"**♛ ⦙  تـم حـذف  {del_u}  الحسـابات المحذوفـة ✓**"
+        del_status = f"**• ⦙  تـم حـذف  {del_u}  الحسـابات المحذوفـة **"
     if del_a > 0:
-        del_status = f"**♛ ⦙  تـم حـذف {del_u} الحسـابات المحذوفـة، ولڪـن لـم يتـم حذف الحسـابات المحذوفـة للمشرفيـن !**"
+        del_status = f"**• ⦙  تـم حـذف {del_u} الحسـابات المحذوفـة، ولڪـن لـم يتـم حذف الحسـابات المحذوفـة للمشرفيـن !**"
     await edit_delete(event, del_status, 5)
     if BOTLOG:
         await show.client.send_message(
             BOTLOG_CHATID,
-            f"**♛ ⦙  تنظيف :**\
-            \n♛ ⦙   {del_status}\
-            \n*♛ ⦙  المحادثـة ⌂** {show.chat.title}(`{show.chat_id}`)",
+            f"**• ⦙  تنظيف :**\
+            \n• ⦙   {del_status}\
+            \n*• ⦙  المحادثـة ⌂** {show.chat.title}(`{show.chat_id}`)",
         )
 
 @iqthon.on(admin_cmd(pattern=r"احصائيات الاعضاء ?([\s\S]*)"))
@@ -859,7 +859,7 @@ async def _(event):  # sourcery no-metrics
     if input_str:
         chat = await event.get_chat()
         if not chat.admin_rights and not chat.creator:
-            await edit_or_reply(event, "**♛ ⦙   انت لست مشرف هنا**")
+            await edit_or_reply(event, "**• ⦙   انت لست مشرف هنا**")
             return False
     p = 0
     b = 0
@@ -873,7 +873,7 @@ async def _(event):  # sourcery no-metrics
     o = 0
     q = 0
     r = 0
-    et = await edit_or_reply(event, "**♛ ⦙   جـاري البحـث عـن قوائـم المشارڪيـن ⌯**")
+    et = await edit_or_reply(event, "**• ⦙   جـاري البحـث عـن قوائـم المشارڪيـن ⌯**")
     async for i in event.client.iter_participants(event.chat_id):
         p += 1
         rights = ChatBannedRights(until_date=None, view_messages=True)
@@ -884,7 +884,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastMonth):
@@ -894,7 +894,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastWeek):
@@ -904,7 +904,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusOffline):
@@ -912,7 +912,7 @@ async def _(event):  # sourcery no-metrics
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
                 else:
@@ -922,7 +922,7 @@ async def _(event):  # sourcery no-metrics
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
                 else:
@@ -934,7 +934,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if i.bot:
@@ -942,7 +942,7 @@ async def _(event):  # sourcery no-metrics
             if "b" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("**♛ ⦙   احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**• ⦙   احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -954,34 +954,34 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**♛ ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
+                    await et.edit("**• ⦙  أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
         elif i.status is None:
             n += 1
     if input_str:
-        required_string = """**♛ ⦙   الـمطرودين {} / {} الأعـضاء
-♛ ⦙   الحـسابـات المـحذوفة: {}
-♛ ⦙   حـالة المستـخدم الفـارغه: {}
-♛ ⦙   اخر ظهور منذ شـهر: {}
-♛ ⦙   اخر ظـهور منـذ اسبوع: {}
-♛ ⦙   غير متصل: {}
-♛ ⦙   المستخدمين النشطون: {}
-♛ ⦙   اخر ظهور قبل قليل: {}
-♛ ⦙   البوتات: {}
-♛ ⦙   مـلاحظة: {}**"""
+        required_string = """**• ⦙   الـمطرودين {} / {} الأعـضاء
+• ⦙   الحـسابـات المـحذوفة: {}
+• ⦙   حـالة المستـخدم الفـارغه: {}
+• ⦙   اخر ظهور منذ شـهر: {}
+• ⦙   اخر ظـهور منـذ اسبوع: {}
+• ⦙   غير متصل: {}
+• ⦙   المستخدمين النشطون: {}
+• ⦙   اخر ظهور قبل قليل: {}
+• ⦙   البوتات: {}
+• ⦙   مـلاحظة: {}**"""
         await et.edit(required_string.format(c, p, d, y, m, w, o, q, r, b, n))
         await sleep(5)
     await et.edit(
-"""**♛ ⦙   : {} مـجموع المـستخدمين
-♛ ⦙   الحـسابـات المـحذوفة: {}
-♛ ⦙   حـالة المستـخدم الفـارغه: {}
-♛ ⦙   اخر ظهور منذ شـهر: {}
-♛ ⦙   اخر ظـهور منـذ اسبوع: {}
-♛ ⦙   غير متصل: {}
-♛ ⦙   المستخدمين النشطون: {}
-♛ ⦙   اخر ظهور قبل قليل: {}
-♛ ⦙   البوتات: {}
-♛ ⦙   مـلاحظة: {} **""".format(            p, d, y, m, w, o, q, r, b, n        )    )    
+"""**• ⦙   : {} مـجموع المـستخدمين
+• ⦙   الحـسابـات المـحذوفة: {}
+• ⦙   حـالة المستـخدم الفـارغه: {}
+• ⦙   اخر ظهور منذ شـهر: {}
+• ⦙   اخر ظـهور منـذ اسبوع: {}
+• ⦙   غير متصل: {}
+• ⦙   المستخدمين النشطون: {}
+• ⦙   اخر ظهور قبل قليل: {}
+• ⦙   البوتات: {}
+• ⦙   مـلاحظة: {} **""".format(            p, d, y, m, w, o, q, r, b, n        )    )    
 
 def weird_division(n, d):
     return n / d if d else 0
@@ -1016,12 +1016,12 @@ async def endmute(event):
         await event.client.send_message(            BOTLOG_CHATID,            "#التقيد\n"            f"الشخص : [{user.first_name}](tg://user?id={user.id})\n"            f"المحادثه : {get_display_name(await event.get_chat())}(`{event.chat_id}`)\n",        )
 @iqthon.iq_cmd(pattern="اكتم(?:\s|$)([\s\S]*)",)
 async def tmuter(event):  # sourcery no-metrics
-    catevent = await edit_or_reply(event, "**♛ ⦙ جاري كتمه مؤقتا ....**")
+    catevent = await edit_or_reply(event, "**• ⦙ جاري كتمه مؤقتا ....**")
     user, reason = await get_user_from_event(event, catevent)
     if not user:
         return
     if not reason:
-        return await catevent.edit("**♛ ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @l3ll3**")
+        return await catevent.edit("**• ⦙ رجاء طريقه كتابه الامر خاطئه قم بروئيه قناه شروحات الاوامر : @l3ll3**")
     reason = reason.split(" ", 1)
     hmm = len(reason)
     cattime = reason[0].strip()
