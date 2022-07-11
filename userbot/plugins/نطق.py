@@ -1,79 +1,125 @@
-# speech to text module for catuserbot by uniborg (@spechide)
+"""
+
+hadi  ©
+
+By jbbbbf
+
+sub hadi
+
+"""
+
 import os
+
 from datetime import datetime
 
-import requests
+import speech_recognition as sr
 
-from userbot import jmthon
+from pydub import AudioSegment
 
-from ..Config import Config
+from userbot import iqthon
+
 from ..core.managers import edit_delete, edit_or_reply
+
 from ..helpers import media_type
 
 plugin_category = "utils"
 
+@iqthon.iq_cmd(pattern="احجي(?:\s|$)([\s\S]*)",
 
-@jmthom.ar_cmd(
-    pattern="نطق$",
-    command=("نطق", plugin_category),
-    info={
-        "header": "speech to text module.",
-        "usage": "{tr}stt",
-    },
-)
+               command=("احجي", plugin_category),
+
+              )
+
 async def _(event):
-    "speech to text."
-    if Config.IBM_WATSON_CRED_URL is None or Config.IBM_WATSON_CRED_PASSWORD is None:
-        return await edit_delete(
-            event,
-            "`تحتاج إلى تعيين متغيرات ENV المطلوبة لهذه الوحدة. \nModule stopping`",
-        )
-    start = datetime.now()
-    lan = "en"
-    if not os.path.isdir(Config.TEMP_DIR):
-        os.makedirs(Config.TEMP_DIR)
-    reply = await event.get_reply_message()
-    mediatype = media_type(reply)
-    if not reply or (mediatype and mediatype not in ["Voice", "Audio"]):
-        return await edit_delete(
-            event,
-            "`قم بالرد على البصمة او ملف صوتي, لتحويله الى نص.`",
-        )
-    catevent = await edit_or_reply(event, "`تحميل على بلدي المحلي ، للتحليل  🙇`")
-    required_file_name = await event.client.download_media(reply, Config.TEMP_DIR)
-    await catevent.edit("`بدأ تحويل البصمة الى نص . .`")
-    headers = {
-        "Content-Type": reply.media.document.mime_type,
-    }
-    data = open(required_file_name, "rb").read()
-    response = requests.post(
-        f"{Config.IBM_WATSON_CRED_URL}/v1/recognize",
-        headers=headers,
-        data=data,
-        auth=("apikey", Config.IBM_WATSON_CRED_PASSWORD),
-    )
 
-    r = response.json()
-    if "results" not in r:
-        return await catevent.edit(r["error"])
-    # process the json to appropriate string format
-    results = r["results"]
-    transcript_response = ""
-    transcript_confidence = ""
-    for alternative in results:
-        alternatives = alternative["alternatives"][0]
-        transcript_response += " " + str(alternatives["transcript"])
-        transcript_confidence += " " + str(alternatives["confidence"])
+    "تحويل الكلام الى نص."
+
+    
+
+    start = datetime.now()
+
+    input_str = event.pattern_match.group(1)
+
+    reply = await event.get_reply_message()
+
+    lan = input_str
+
+    if not lan:
+
+         return await edit_delete(event, "يجب ان تضع اختصار اللغة المطلوبة")
+
+    
+
+    #ted = await edit_or_reply(event, str(lan))
+
+    if not os.path.isdir(Config.TEMP_DIR):
+
+        os.makedirs(Config.TEMP_DIR)
+
+    mediatype = media_type(reply)
+
+    if not reply or (mediatype and mediatype not in ["Voice", "Audio"]):
+
+        return await edit_delete(
+
+            event,
+
+            "`قم بالرد على رسالة او مقطع صوتي لتحويله الى نص.`",
+
+        )
+
+    catevent = await edit_or_reply(event, "`يجري تنزيل الملف...`")
+
+    oggfi = await event.client.download_media(reply, Config.TEMP_DIR)
+
+    await catevent.edit("`يجري تحويل الكلام الى نص....`")
+
+    r = sr.Recognizer()
+
+    #audio_data = open(required_file_name, "rb").read()
+
+    ogg = oggfi.removesuffix('.ogg')
+
+   
+
+    AudioSegment.from_file(oggfi).export(f"{ogg}.wav", format="wav")
+
+    user_audio_file = sr.AudioFile(f"{ogg}.wav")
+
+    with user_audio_file as source:
+
+         audio = r.record(source)
+
+    
+
+    try:
+
+         text = r.recognize_google(audio, language=str(lan))
+
+    except ValueError:
+
+         return await edit_delete(event, "**لا يوجد كلام في المقطع الصوتي**")
+
+    except BaseException as err:
+
+         return await edit_delete(event, f"**!لا يوجد كلام في هذا المقطع الصوتي\n{err}**")
+
     end = datetime.now()
+
     ms = (end - start).seconds
-    if not transcript_response:
-        string_to_show = "**اللغة : **`{}`\n**الوقت المستغرق : **`{} ثانية`\n**لم يتم العثور على نتائج**".format(
-            lan, ms
+
+    
+
+    string_to_show = "**يكول : **`{}`".format(
+
+            text
+
         )
-    else:
-        string_to_show = "**اللغة : **`{}`\n**النص : **`{}`\n**الوقت المستغرق : **`{} ثانيه`\n**الثقة : **`{}`".format(
-            lan, transcript_response, ms, transcript_confidence
-        )
+
     await catevent.edit(string_to_show)
+
     # now, remove the temporary file
-    os.remove(required_file_name)
+
+    os.remove(oggfi)
+
+    os.remove(f"{ogg}.wav")
