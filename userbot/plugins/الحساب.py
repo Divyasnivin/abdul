@@ -166,19 +166,19 @@ async def stats(event):
         unread += dialog.unread_count
     stop_time = time.time() - start_time
     full_name = inline_mention(await event.client.get_me())
-    response = f"📌 **• ⚜️ |  احصائيات حسـابك العـامة لـ {full_name} 📊** \n"
-    response += f"**♛ ⦙  الدردشات الخاصة 🏷️  :** {private_chats} \n"
-    response += f"**♛ ⦙   الاشـخاص 🚹 : {private_chats - bots}` \n"
-    response += f"**♛ ⦙   الـبوتـات 🤖 : {bots}` **\n"
-    response += f"**♛ ⦙   عـدد المجـموعـات 🚻 :** `{groups}` \n"
-    response += f"**♛ ⦙   عـدد القنـوات  🚻 :** `{broadcast_channels}` \n"
-    response += f"**♛ ⦙   عـدد المجـموعات التـي تكـون فيها ادمـن  🛂 :** `{admin_in_groups}` \n"
-    response += f"**♛ ⦙   عـدد المجموعات التـي أنـشأتـها  🛃** : `{creator_in_groups}` \n"
-    response += f"**♛ ⦙   عـدد القنوات التـي تكـون فيها ادمـن 📶 : `{admin_in_broadcast_channels}` **\n"
-    response += f"**♛ ⦙   حقوق المسؤول في القنوات  🛂 : `{admin_in_broadcast_channels - creator_in_channels}` **\n"
-    response += f"**عـدد المحـادثـات الغيـر مقـروء 📄 :** {unread} \n"
-    response += f"**عـدد الـتاكـات الغيـر مقـروء 📌 :** {unread_mentions} \n"
-    response += f"**♛ ⦙   استغرق الأمر  🔍  :** `{stop_time:.02f}` ثانيه \n"
+    response = f" **•  |  احصائيات حسـابك العـامة لـ {full_name} ** \n"
+    response += f"** ⦙  الدردشات الخاصة   :** {private_chats} \n"
+    response += f"** ⦙   الاشـخاص : {private_chats - bots}` \n"
+    response += f"** ⦙   الـبوتـات  : {bots}` **\n"
+    response += f"** ⦙   عـدد المجـموعـات  :** `{groups}` \n"
+    response += f"** ⦙   عـدد القنـوات   :** `{broadcast_channels}` \n"
+    response += f"** ⦙   عـدد المجـموعات التـي تكـون فيها ادمـن   :** `{admin_in_groups}` \n"
+    response += f"** ⦙   عـدد المجموعات التـي أنـشأتـها** : `{creator_in_groups}` \n"
+    response += f"** ⦙   عـدد القنوات التـي تكـون فيها ادمـن  : `{admin_in_broadcast_channels}` **\n"
+    response += f"** ⦙   حقوق المسؤول في القنوات   : `{admin_in_broadcast_channels - creator_in_channels}` **\n"
+    response += f"**عـدد المحـادثـات الغيـر مقروءة  :** {unread} \n"
+    response += f"**عـدد التاقات الغيـر مقروءة  :** {unread_mentions} \n"
+    response += f"** ⦙   استغرق الأمر    :** `{stop_time:.02f}` ثانيه \n"
     await cat.edit(response)
 @iqthon.on(admin_cmd(outgoing=True, pattern="ص1$"))
 async def iqvois(vois):
@@ -1054,7 +1054,7 @@ async def _(event):
         await catevent.edit(str(e))
     else:
         if photo:
-            await catevent.edit("**♛ ⦙   أشترك @IQTHON **")
+            await catevent.edit("**♛ ⦙   أشترك @kbbbd2 **")
             if photo.endswith((".mp4", ".MP4")):
                 # https://t.me/tgbetachat/324694
                 size = os.stat(photo).st_size
@@ -1173,7 +1173,7 @@ if 1 == 1:
 @iqthon.on(admin_cmd(pattern="معرفاتي(?: |$)(.*)"))
 async def _(event):
     result = await event.client(GetAdminedPublicChannelsRequest())
-    output_str = "**♛ ⦙  جميع القنوات والمجموعات التي قمت بإنشائها  💠  :**\n"
+    output_str = "**♛ ⦙  جميع القنوات والمجموعات التي قمت بإنشائها    :**\n"
     output_str += "".join(f"♛ ⦙    - {channel_obj.title} @{channel_obj.username} \n"
         for channel_obj in result.chats)
     await edit_or_reply(event, output_str)
@@ -1394,7 +1394,7 @@ async def permalink(mention):
     if not user:
         return
     if custom:
-        return await edit_or_reply(mention, f"⨳ | [{custom}](tg://user?id={user.id})")
+        return await edit_or_reply(mention, f"• | [{custom}](tg://user?id={user.id})")
     tag = user.first_name.replace("\u2060", "") if user.first_name else user.username
     await edit_or_reply(mention, f"⨳ | [{tag}](tg://user?id={user.id})")
 @iqthon.on(admin_cmd(pattern="اسمه(?:\s|$)([\s\S]*)"))
@@ -1403,10 +1403,10 @@ async def permalink(mention):
     if not user:
         return
     if custom:
-        return await edit_or_reply(mention, f"⨳ | {custom} ")
+        return await edit_or_reply(mention, f"• | {custom} ")
     ll5 = user.first_name.replace("\u2060", "") if user.first_name else (" ")
     kno = user.last_name.replace("\u2060", "") if user.last_name else (" ")
-    await edit_or_reply(mention, f"⨳  {ll5} {kno}")  
+    await edit_or_reply(mention, f"•  {ll5} {kno}")  
 @iqthon.on(admin_cmd(pattern="صورته(?:\s|$)([\s\S]*)"))
 async def potocmd(event):
     uid = "".join(event.raw_text.split(maxsplit=1)[1:])
@@ -1559,7 +1559,7 @@ async def _(e):
             out_file.name = "output.txt"
             await e.reply(                f"`{e.text}`", file=out_file, thumb=None ) 
         await e.delete()
-@iqthon.on(admin_cmd(pattern="كول (.*)"))
+@iqthon.on(admin_cmd(pattern="قول (.*)"))
 async def _(event):
     bxt = Config.TG_BOT_USERNAME
     try:
@@ -1585,7 +1585,7 @@ def text_set(text):
     return lines[:25]
     
 
-@iqthon.on(admin_cmd(pattern="كتابه ?(.*)"))
+@iqthon.on(admin_cmd(pattern="كتابة ?(.*)"))
 async def writer(e):
     if e.reply_to:
         reply = await e.get_reply_message()
