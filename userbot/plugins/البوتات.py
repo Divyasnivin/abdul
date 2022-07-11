@@ -47,7 +47,7 @@ async def iq(iqthon):
             (await iqthon.get_reply_message()).message
 
             return
-    LLL5L = await bot.inline_query("xobot", f"{(iqtfy(kn))}")
+    LLL5L = await bot.inline_query("xo5_bot", f"{(iqtfy(kn))}")
     await LLL5L[0].click(
         iqthon.chat_id,
         reply_to=iqthon.reply_to_msg_id,
