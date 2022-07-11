@@ -389,27 +389,3 @@ async def _iq(iqthon):
     except Exception as e:
         await edit_delete(iqthon, f"                                              **خطأ :**\n`{str(e)}`                       ", 5)
         
-        @iqthon.on(admin_cmd(pattern="العاب(?: |$)(.*)"))
-
-async def iq(iqthon):
-
-    kn = iqthon.pattern_match.group(1)
-
-    if not kn:
-
-        if iqthon.is_reply:
-
-            (await iqthon.get_reply_message()).message
-return
-
-    LLL5L = await bot.inline_query("inlinegamesbot", f"{(iqtfy(kn))}")
-
-    await LLL5L[0].click(
-
-        iqthon.chat_id,
-
-        reply_to=iqthon.reply_to_msg_id,
-
-        silent=True if iqthon.is_reply else False,
-
-        hide_via=True)
