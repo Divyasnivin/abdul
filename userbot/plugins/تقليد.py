@@ -3,7 +3,7 @@ created by @lMl10l
 Idea by @JepThon
 """
 
-from jepthon import jepiq
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper.echo_sql import (
@@ -20,7 +20,7 @@ from . import get_user_from_event
 plugin_category = "fun"
 
 
-@jepiq.ar_cmd(
+@iqthon.on(admin_cmd(
     pattern="تقليد$",
     command=("تقليد", plugin_category),
     info={
@@ -60,7 +60,7 @@ async def echo(event):
         await edit_or_reply(catevent, "⌁︙تـم تفعـيل امـر التقليد علـى هذا الشـخص\n ⌁︙سـيتم تقليـد جميع رسائلـه هـنا")
 
 
-@jepiq.ar_cmd(
+@iqthon.on(admin_cmd(
     pattern="مسح المقلدين",
     command=("مسح المقلدين", plugin_category),
     info={
@@ -89,7 +89,7 @@ async def echo(event):
         await edit_or_reply(event, "The user is not activated with echo")
 
 
-@jepiq.ar_cmd(
+@iqthon.on(admin_cmd(
     pattern="ايقاف التقليد ( -a)?",
     command=("ايقاف التقليد", plugin_category),
     info={
@@ -135,7 +135,7 @@ async def echo(event):
             )
 
 
-@jepiq.ar_cmd(
+@iqthon.on(admin_cmd(
     pattern="المقلدين( -a)?$",
     command=("المقلدين", plugin_category),
     info={
@@ -199,7 +199,7 @@ async def echo(event):  # sourcery no-metrics
     await edit_or_reply(event, output_str)
 
 
-@jepiq.ar_cmd(incoming=True, edited=False)
+@iqthon.on(admin_cmd(incoming=True, edited=False)
 async def samereply(event):
     if is_echo(event.chat_id, event.sender_id) and (
         event.message.text or event.message.sticker
