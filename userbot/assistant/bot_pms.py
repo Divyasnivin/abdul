@@ -106,19 +106,19 @@ async def bot_start(event):
             start_msg = f"**⌔︙ اهلا وسهلا اخوي  {mention} **\
                         \n**⌔︙ {my_mention}'انا البوت المساعد .**\
                         \n**⌔︙ يمكنك التواصل مع صاحب البوت فقط ارسل رسالتك 👤.**\
-                        \n\n**⌔︙ البوت خاص بسورس :** [TELETHON FOR ARABS](https://t.me/X888E)"
+                        \n\n**⌔︙ البوت خاص بسورس :** [source jack](https://t.me/kbbbd2)"
         buttons = [
             (
-                Button.url("تنصيب سورسنا", "https://heroku.com/deploy?template=https://github.com/Guevaras1explanations/TelethonArab-"),
+                Button.url("قناتنا", "https://t.me/kbbbd2"),
                 Button.url(
                     "قناه المساعد",
-                    "https://t.me/E999G",
+                    "https://t.me/kbbbd2",
                 ),
             )
         ]
     else:
         start_msg = "**⌔︙ اهلا وسهلا بك ايها المطور ⚜️**\
-            \n⌔︙ لروئيه الاوام الخاصه بالمطور أرسل : `/مساعدة`"
+            \n⌔︙ لرؤية الاوامر الخاصه بالمطور أرسل : `/مساعدة`"
         buttons = None
     try:
         await event.client.send_message(
@@ -180,7 +180,7 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
+                return await event.reply("انت محظور من البوت. ❌")
             except Exception as e:
                 return await event.reply(f"**Error:**\n`{str(e)}`")
             try:
