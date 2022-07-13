@@ -311,7 +311,7 @@ async def _(event):
             await event.client.send_message(event.chat_id, response.message)
 @iqthon.on(admin_cmd(pattern="انستا (.*)"))
 async def iq(iqthoninsta):
-    chat = "@instasavegrambot"
+    chat = "@bs_bot"
     link = iqthoninsta.pattern_match.group(1)
     if "www.instagram.com" not in link:
         await edit_or_reply(iqthoninsta, "يجب كتابة رابط")
@@ -327,7 +327,7 @@ async def iq(iqthoninsta):
             details = await knov.get_response()
             await iqthoninsta.client.send_read_acknowledge(knov.chat_id)
         except YouBlockedUserError:
-            await iqevent.edit("بفتح الحظر  @instasavegrambot")
+            await iqevent.edit("بفتح الحظر  @bs_bot")
             return
         await iqevent.delete()
         l5 = await iqthoninsta.client.send_file(iqthoninsta.chat_id, video)
