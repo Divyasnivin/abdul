@@ -38,8 +38,7 @@ IQMOG = re.compile(
 
 def iqtfy(inputString: str) -> str:
     return re.sub(IQMOG, "", inputString)
-
-  @iqthon.on(admin_cmd(pattern="ساوند ([\s\S]*)",
+@iqthon.on(admin_cmd(pattern="ساوند ([\s\S]*)",
     command=("ساوند", plugin_category),
     info={
         "header": "لتحميل الاغاني من ساوند كلود عبر الرابـط",
